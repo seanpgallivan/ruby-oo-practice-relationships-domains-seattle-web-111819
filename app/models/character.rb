@@ -3,13 +3,10 @@ class Character
     @@all = []
 
     attr_reader :name, :actor
-    attr_accessor :movies, :shows
 
-    def initialize(name, actor, movies=[], shows=[])
+    def initialize(name, actor)
         @name = name
         @actor = actor
-        @movies = movies
-        @shows = shows
         @@all << self
     end
 
@@ -17,8 +14,12 @@ class Character
         @@all
     end
 
+    def performances
+        Performance.all.select {|perf| perf.character == self}
+    end
+
     def self.most_appearances
-        @@all.max_by {|character| character.movies.count + character.shows.count}
+        @@all.max_by {|character| character.performances.count}
     end
 
 end

@@ -1,11 +1,12 @@
-class Movie
+class Episode
 
     @@all = []
 
-    attr_reader :title
+    attr_reader :title, :show
 
-    def initialize(title)
+    def initialize(title, show)
         @title = title
+        @show = show
         @@all << self
     end
 
@@ -14,15 +15,11 @@ class Movie
     end
 
     def characters
-        Performance.all.select {|perf| perf.video == self}
+        Performance.all.select {|perf| perf.video = self}
     end
 
     def actors
         characters.map {|character| character.actor}
-    end
-
-    def self.most_actors
-        @@all.max_by {|movie| movie.charcters.count}
     end
 
 end

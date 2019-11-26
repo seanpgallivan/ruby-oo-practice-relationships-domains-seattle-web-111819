@@ -4,9 +4,8 @@ class Show
 
     attr_reader :title
 
-    def initialize(title, characters)
+    def initialize(title)
         @title = title
-        characters.each {|character| character.shows << self}
         @@all << self
     end
 
@@ -14,8 +13,12 @@ class Show
         @@all
     end
 
+    def episodes
+        Episode.all.select {|episode| episode.show == self}
+    end
+
     def characters
-        Character.all.select {|character| character.shows.include?(self)}
+        episodes.map {|episode| episode.characters}.uniq
     end
 
     def actors
