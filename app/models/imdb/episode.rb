@@ -15,7 +15,7 @@ class Episode
     end
 
     def characters
-        Performance.all.select {|perf| perf.video = self}
+        Performance.all.select {|perf| perf.video == self}
     end
 
     def actors
