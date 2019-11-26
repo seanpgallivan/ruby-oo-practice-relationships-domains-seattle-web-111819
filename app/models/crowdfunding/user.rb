@@ -14,7 +14,7 @@ class User
     end
 
     def pledges
-        Pledge.all.select {|pledge| pledge.user = self}
+        Pledge.all.select {|pledge| pledge.user == self}
     end
 
     def projects
